@@ -1,78 +1,44 @@
-[31/03, 23:37] Premdev: Here's the transcribed text from the image:
-
----
-
-**20.0 + 30.0 = 50.0**
-
-**Step 9:** nano Dockerfile
-Replace entire content with:
-FROM eclipse-temurin:17-jdk-alpine
-WORKDIR /app
-COPY ./app
-RUN javac sample.java
-CMD ["java", "sample"]
-
-**Step 10:** Give the following commands
-- docker build -t chandana2005/javacalculator .
-- docker run --name myjava -it chandana2005/javacalculator ] optional
-- docker image ls
-
----
-
-**Week-7**
-
-**Aim:** Ansible setup and SSH keys
-
-**Procedure:**
-
-**Step 1:** Go to AWS console → EC2 → launch two instances:
-one for AnsibleController and other for AnsibleNode
-
-**Step 2:** Connect AnsibleController and AnsibleNode and type the commands in AnsibleNode terminal:
-- sudo apt-get update
-- python3 --version
-- sudo passwd ubuntu
-  password: ubuntu — confirm password: ubuntu
-- sudo vim /etc/ssh/sshd_config
-  Esc+i Remove # in #PasswordAuthentication yes
-  ESC : wq to come out
-- sudo service ssh restart
-
-**Step 3:** Go to AnsibleController terminal and type the commands
-[31/03, 23:38] Premdev: ```
-* sudo apt-get update
-* python --version
-* ssh-keygen -t rsa -b 4096
-  Press Enter 3 times
-* cat /home/ubuntu/.ssh/id_rsa.pub   [copy the key]
-
-Step 4: Now go to AnsibleNode terminal and type command
-* sudo vim .ssh/authorized_keys   [press i]
-  go to end of other key which is already present
-  and paste the key that is copied as AnsibleController
-* ESC + :wq
-
-Step 5: Go to AnsibleNode type hostname -I you will
-get the Node IP. then go to AnsibleController terminal
-and type the commands:
-* ssh -v ubuntu@Node_Ip
-* sudo apt-get install software-properties-common
-* sudo apt-add-repository ppa:ansible/ansible
-* sudo apt-get update
-* sudo apt-get install -y ansible
-* cd /etc/ansible
-* sudo vim hosts
-? -> At end type node-Ip  ESC+:wq
-* ansible all -i /etc/ansible/hosts -m command -a 'free'
-* ansible all -i /etc/ansible/hosts -m command -a
-  'touch f1 f2 f3'
-* ssh node-Ip
-* ls
-* ansible all -m apt -a 'name=git state=present' -b
-* ansible all -m apt -a 'name=tomcat9 state=
-  present update_cache=yes' -b
 ```
-[31/03, 23:39] Premdev: ```
+Week-10
+
+Aim: Create a docker image for any application using Docker
+file and push it to Docker hub
+
+Procedure:
+Step1: Go to AWS console --> EC2, click launch instance
+and create an instance named Docker and create key pair
+and choose ubuntu OS and launch it
+
+Step2: Security --> security group --> Edit inbound rule
+add three rules they are
+        HTTP  port:80   Anywhere IPv4
+        Custom TCP  port:7070  Anywhere IPv4
+        Custom TCP  port:4444  Anywhere IPv4
+then connect the instance, again click on connect
+
+Step3: In the terminal type the commands
+* ssh -i keypair_1.pem ubuntu@public-ip
+* sudo su -
+* curl -fsSL https://get.docker.com -o install-docker.sh
+* sh install-docker.sh
+* docker --version
+* docker images
+* docker pull tomee
+* docker run --name mytomcat -p 7070:8080 -d tomee
+* docker ps
+
+Step4: Go to browser and give publicip:7070 then you
+should see the tomcat page
+
+Step5: Again go to terminal and continue with commands
+* docker ps
+* docker ps -a
+* docker stop mytomcat
+* docker start mytomcat
+* docker restart mytomcat
+* docker stop mytomcat
+```
+```
 * docker rm mytomcat
 * docker run --name hub -d -p 4444:4444 selenium/hub
 * docker run --name chrome -d --link hub:selenium/
@@ -113,43 +79,77 @@ Enter first number
 Enter second number
 30
 ```
-[31/03, 23:39] Premdev: ```
-Week-10
+Here's the transcribed text from the image:
 
-Aim: Create a docker image for any application using Docker
-file and push it to Docker hub
+---
 
-Procedure:
-Step1: Go to AWS console --> EC2, click launch instance
-and create an instance named Docker and create key pair
-and choose ubuntu OS and launch it
+**20.0 + 30.0 = 50.0**
 
-Step2: Security --> security group --> Edit inbound rule
-add three rules they are
-        HTTP  port:80   Anywhere IPv4
-        Custom TCP  port:7070  Anywhere IPv4
-        Custom TCP  port:4444  Anywhere IPv4
-then connect the instance, again click on connect
+**Step 9:** nano Dockerfile
+Replace entire content with:
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+COPY ./app
+RUN javac sample.java
+CMD ["java", "sample"]
 
-Step3: In the terminal type the commands
-* ssh -i keypair_1.pem ubuntu@public-ip
-* sudo su -
-* curl -fsSL https://get.docker.com -o install-docker.sh
-* sh install-docker.sh
-* docker --version
-* docker images
-* docker pull tomee
-* docker run --name mytomcat -p 7070:8080 -d tomee
-* docker ps
+**Step 10:** Give the following commands
+- docker build -t chandana2005/javacalculator .
+- docker run --name myjava -it chandana2005/javacalculator ] optional
+- docker image ls
 
-Step4: Go to browser and give publicip:7070 then you
-should see the tomcat page
+---
 
-Step5: Again go to terminal and continue with commands
-* docker ps
-* docker ps -a
-* docker stop mytomcat
-* docker start mytomcat
-* docker restart mytomcat
-* docker stop mytomcat
+**Week-7**
+
+**Aim:** Ansible setup and SSH keys
+
+**Procedure:**
+
+**Step 1:** Go to AWS console → EC2 → launch two instances:
+one for AnsibleController and other for AnsibleNode
+
+**Step 2:** Connect AnsibleController and AnsibleNode and type the commands in AnsibleNode terminal:
+- sudo apt-get update
+- python3 --version
+- sudo passwd ubuntu
+  password: ubuntu — confirm password: ubuntu
+- sudo vim /etc/ssh/sshd_config
+  Esc+i Remove # in #PasswordAuthentication yes
+  ESC : wq to come out
+- sudo service ssh restart
+
+**Step 3:** Go to AnsibleController terminal and type the commands
+```
+* sudo apt-get update
+* python --version
+* ssh-keygen -t rsa -b 4096
+  Press Enter 3 times
+* cat /home/ubuntu/.ssh/id_rsa.pub   [copy the key]
+
+Step 4: Now go to AnsibleNode terminal and type command
+* sudo vim .ssh/authorized_keys   [press i]
+  go to end of other key which is already present
+  and paste the key that is copied as AnsibleController
+* ESC + :wq
+
+Step 5: Go to AnsibleNode type hostname -I you will
+get the Node IP. then go to AnsibleController terminal
+and type the commands:
+* ssh -v ubuntu@Node_Ip
+* sudo apt-get install software-properties-common
+* sudo apt-add-repository ppa:ansible/ansible
+* sudo apt-get update
+* sudo apt-get install -y ansible
+* cd /etc/ansible
+* sudo vim hosts
+? -> At end type node-Ip  ESC+:wq
+* ansible all -i /etc/ansible/hosts -m command -a 'free'
+* ansible all -i /etc/ansible/hosts -m command -a
+  'touch f1 f2 f3'
+* ssh node-Ip
+* ls
+* ansible all -m apt -a 'name=git state=present' -b
+* ansible all -m apt -a 'name=tomcat9 state=
+  present update_cache=yes' -b
 ```
