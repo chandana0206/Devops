@@ -54,11 +54,11 @@ Step5: Again go to terminal and continue with commands
 * vim Dockerfile
 
 Step 6: paste the following in dockerfile
-FROM eclipse-temurin:17-jdk    [ESC+:wq or
-WORKDIR /app                    ctrl+O Enter
-COPY . /app                     ctrl+x]
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY . /app
 RUN javac sample.java
-CMD ["java", "sample"]
+CMD ["java","sample"]
 
 Step 7: vim sample.java  paste the calculator program
 save it and close it
